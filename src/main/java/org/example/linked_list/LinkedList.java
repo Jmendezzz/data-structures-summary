@@ -21,6 +21,7 @@ public class LinkedList<T> {
       tail.next = newNode;
       tail = newNode;
     }
+    length++;
   }
 
   public Node<T> removeLast(){
@@ -30,10 +31,10 @@ public class LinkedList<T> {
 
     Node<T> temp = head;
 
-    while(temp.next != tail){
+    while(temp.next != tail && temp.next != null){
       temp = temp.next;
     }
-    Node<T> removedNode = temp.next;
+    Node<T> removedNode = temp == head ? temp : temp.next;
 
     tail = temp;
     tail.next = null;
@@ -72,6 +73,28 @@ public class LinkedList<T> {
       tail=null;
     }
     return removedNode;
+  }
+
+  public Node<T> get(int index){
+    if(index >= length || index < 0){
+      throw new NullPointerException();
+    }
+
+    Node<T> temp = head;
+    int currentPosition = 0;
+    while(currentPosition != index){
+      currentPosition++;
+      temp = temp.next;
+    }
+    return temp;
+  }
+
+  public void printList(){
+    Node<T> temp = head;
+    for (int i = 0; i<length; i++){
+      System.out.println(temp.data);
+      temp = temp.next;
+    }
   }
 
 
